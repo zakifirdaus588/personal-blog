@@ -1,5 +1,76 @@
 const yearSpan = document.getElementById('year');
 
+const menuToggle = document.querySelector('.menu-toggle');
+const mainNavigation = document.getElementById('main-navigation');
+
+if (menuToggle && mainNavigation) {
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mainNavigation.classList.toggle('is-open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+  });
+
+  mainNavigation.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mainNavigation.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Buka menu');
+    });
+  });
+}
+
+const publicUrl = 'https://zakifirdaus588.github.io/personal-blog/website/index.html';
+const shareableSections = ['summary', 'profile', 'about', 'values', 'journey', 'four-points', 'story', 'timeline', 'gallery'];
+
+shareableSections.forEach((sectionId) => {
+  const section = document.getElementById(sectionId);
+  const heading = section?.querySelector('h2');
+  const intro = section?.querySelector('.section-intro');
+
+  if (!section || !heading || !intro) return;
+
+  const share = document.createElement('div');
+  share.className = 'share-control';
+  share.innerHTML = `
+    <button class="share-trigger" type="button" aria-expanded="false">Bagikan bagian ini</button>
+    <div class="share-menu" role="menu">
+      <button type="button" data-share="whatsapp" role="menuitem">WhatsApp</button>
+      <button type="button" data-share="facebook" role="menuitem">Facebook</button>
+      <button type="button" data-share="instagram" role="menuitem">Instagram</button>
+      <button type="button" data-share="copy" role="menuitem">Salin link</button>
+    </div>
+  `;
+  intro.appendChild(share);
+
+  const trigger = share.querySelector('.share-trigger');
+  const shareMenu = share.querySelector('.share-menu');
+  const sectionUrl = `${publicUrl}#${sectionId}`;
+  const shareText = `${heading.textContent.trim()} - Zaki's Journey`;
+
+  trigger.addEventListener('click', () => {
+    const isOpen = share.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  shareMenu.addEventListener('click', async (event) => {
+    const button = event.target.closest('[data-share]');
+    if (!button) return;
+
+    const service = button.dataset.share;
+    if (service === 'whatsapp') {
+      window.open(`https://wa.me/?text=${encodeURIComponent(`${shareText} ${sectionUrl}`)}`, '_blank', 'noopener');
+    } else if (service === 'facebook') {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(sectionUrl)}`, '_blank', 'noopener');
+    } else if (service === 'instagram' && navigator.share) {
+      await navigator.share({ title: shareText, text: shareText, url: sectionUrl });
+    } else if (service === 'instagram' || service === 'copy') {
+      await navigator.clipboard.writeText(sectionUrl);
+      button.textContent = 'Link tersalin';
+      setTimeout(() => { button.textContent = service === 'instagram' ? 'Instagram' : 'Salin link'; }, 1600);
+    }
+  });
+});
+
 if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }

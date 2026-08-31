@@ -7,6 +7,11 @@
       name="description"
       content="Zaki's Journey — blog pribadi tentang Muhammad Zaki Firdaus, dari masa kecil, sekolah, dan perjalanan menuju masa depan."
     />
+    <meta property="og:title" content="Zaki's Journey" />
+    <meta property="og:description" content="Cerita hidup Zaki dari masa kecil, sekolah, hingga mimpi masa depan." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://zakifirdaus588.github.io/personal-blog/website/index.html" />
+    <meta property="og:image" content="https://zakifirdaus588.github.io/personal-blog/foto-zaki/foto-zaki.jpg" />
     <title>Zaki's Journey</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,6 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -21,7 +27,12 @@
       <header class="topbar">
         <div class="container nav-wrap">
           <a href="#home" class="brand">Zaki's Journey</a>
-          <nav class="nav" aria-label="Navigasi utama">
+          <button class="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="main-navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav class="nav" id="main-navigation" aria-label="Navigasi utama">
             <a href="#about">Tentang</a>
             <a href="#story">Cerita</a>
             <a href="#timeline">Timeline</a>
@@ -73,7 +84,7 @@
           </div>
         </section>
 
-        <section class="summary" aria-labelledby="summary-title">
+        <section class="summary" id="summary" aria-labelledby="summary-title">
           <div class="container section-intro">
             <p class="eyebrow">Empat poin utama</p>
             <h2 id="summary-title">Semua yang membangun perjalanan dan identitas saya.</h2>
@@ -102,7 +113,7 @@
           </div>
         </section>
 
-        <section class="profile" aria-labelledby="profile-title">
+        <section class="profile" id="profile" aria-labelledby="profile-title">
           <div class="container section-intro">
             <p class="eyebrow">Profil singkat</p>
             <h2 id="profile-title">Siapakah Zaki di balik semua perjalanan itu?</h2>
@@ -211,7 +222,7 @@
           </div>
         </section>
 
-        <section class="journey" aria-labelledby="journey-title">
+        <section class="journey" id="journey" aria-labelledby="journey-title">
           <div class="container section-intro">
             <p class="eyebrow">Pendidikan & perjalanan</p>
             <h2 id="journey-title">Dari masa kecil sampai titik sekarang.</h2>
@@ -244,7 +255,7 @@
           </div>
         </section>
 
-        <section class="four-points" aria-labelledby="four-points-title">
+        <section class="four-points" id="four-points" aria-labelledby="four-points-title">
           <div class="container section-intro">
             <p class="eyebrow">Poin utama</p>
             <h2 id="four-points-title">Empat bagian yang paling menggambarkan perjalanan hidup saya.</h2>
